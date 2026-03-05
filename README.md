@@ -1,11 +1,11 @@
 <div align="center">
-  <img width="120" height="120" alt="Logo" src="https://lichnghi.vercel.app/logo.png" />
+  <img width="120" height="120" alt="Logo" src="https://huyvusite.vercel.app/logo.png" />
 
   <h1>HUYVU2512 – Công cụ cá nhân</h1>
 
   <p>Tập hợp các công cụ tiện ích giúp sinh viên quản lý thời gian, tài chính và lịch học hiệu quả.</p>
 
-  <a href="https://lichnghi.vercel.app/">🌐 Live Demo</a> &nbsp;|&nbsp;
+  <a href="https://huyvusite.vercel.app/">🌐 Live Demo</a> &nbsp;|&nbsp;
   <a href="#tính-năng">✨ Tính năng</a> &nbsp;|&nbsp;
   <a href="#chạy-locally">🚀 Cài đặt</a>
 </div>
@@ -19,16 +19,14 @@
 | 🏠 **Trang chủ** | Dashboard tổng quan với đồng hồ thực, thời tiết và đếm ngược ngày lễ |
 | 📅 **Lịch nghỉ** | Lịch nghỉ lễ Việt Nam, theo dõi lịch học theo tuần |
 | 💰 **Chi tiêu** | Quản lý sinh hoạt phí, chi phí cố định và chi phí nước điện |
-| ⚽ **Bóng đá** | Xem lịch thi đấu bóng đá |
-| 📚 **Học tập** | Hỗ trợ học tập, AI Code Doctor tích hợp Gemini AI |
-| 🎬 **YouTube Tools** | Công cụ hỗ trợ xử lý video YouTube |
+| ⚽ **Bóng đá** | Xem lịch thi đấu Man City |
+| 📚 **Học tập** | Theo dõi điểm số và tính GPA theo chuẩn tín chỉ UNETI |
 
 ## 🛠️ Công nghệ
 
 - **Frontend:** React 19 + TypeScript
 - **Build tool:** Vite
 - **Styling:** Tailwind CSS
-- **AI:** Google Gemini API (`@google/genai`)
 - **Deploy:** Vercel + Vercel Analytics
 
 ## 🚀 Chạy Locally
@@ -39,14 +37,11 @@
 # 1. Cài dependencies
 npm install
 
-# 2. Tạo file .env.local và thêm Gemini API key
-echo "GEMINI_API_KEY=your_api_key_here" > .env.local
-
-# 3. Chạy dev server
+# 2. Chạy dev server
 npm run dev
 ```
 
-Truy cập `http://localhost:5173` trên trình duyệt.
+Truy cập `http://localhost:3000` trên trình duyệt.
 
 ## 📦 Build & Deploy
 
