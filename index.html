@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HUYVU2512 - Công cụ cá nhân</title>
+
+  <!-- Meta tags for social sharing -->
+  <meta name="description"
+    content="Khám phá các công cụ tiện ích giúp bạn quản lý thời gian và tài chính hiệu quả. Giúp sinh viên theo dõi lịch học, chi tiêu và sinh hoạt phí." />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lichnghi.vercel.app/" />
+  <meta property="og:title" content="HUYVU2512 - Công cụ cá nhân" />
+  <meta property="og:description"
+    content="Khám phá các công cụ tiện ích giúp bạn quản lý thời gian và tài chính hiệu quả. Giúp sinh viên theo dõi lịch học, chi tiêu và sinh hoạt phí." />
+  <meta property="og:image" content="/logo.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://lichnghi.vercel.app/" />
+  <meta property="twitter:title" content="HUYVU2512 - Công cụ cá nhân" />
+  <meta property="twitter:description"
+    content="Khám phá các công cụ tiện ích giúp bạn quản lý thời gian và tài chính hiệu quả. Giúp sinh viên theo dõi lịch học, chi tiêu và sinh hoạt phí." />
+  <meta property="twitter:image" content="/logo.png" />
+
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="shortcut icon" href="/logo.png" />
+
+  <!-- Vercel Analytics -->
+  <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+  <script defer src="/_vercel/insights/script.js" data-skip-transform></script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Remove default arrow spinners from number inputs */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type=number] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+
+    /* Global Compact Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 99px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+
+  <!-- Add html2canvas for image generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>
