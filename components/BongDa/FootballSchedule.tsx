@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect } from 'react';
-import { GoogleGenAI } from "@google/genai";
 
 interface SimpleMatch {
     id: string;
@@ -259,117 +258,15 @@ const FootballSchedule: React.FC = () => {
         setLoading(true);
         setError(null);
         try {
-            // Robust API Key Strategy (Exact same as AICodeDoctor)
-            let apiKey = '';
-            try {
-                // @ts-ignore
-                if (typeof process !== 'undefined' && process.env) {
-                    apiKey = process.env.NEXT_PUBLIC_API_KEY || process.env.API_KEY || process.env.REACT_APP_API_KEY || '';
-                }
-                // @ts-ignore
-                if (!apiKey && typeof import.meta !== 'undefined' && import.meta.env) {
-                    // @ts-ignore
-                    apiKey = import.meta.env.VITE_GOOGLE_AI_API_KEY || '';
-                }
-            } catch (e) { console.warn("Env check failed", e); }
-
-            // Note: If no API key is found, feature will be disabled
-            // You need to create a .env file with VITE_GOOGLE_AI_API_KEY to enable this feature
-
-
-            if (!apiKey) {
-                // Trigger fallback immediately if no key
-                throw new Error("API Key missing");
-            }
-
-            const ai = new GoogleGenAI({ apiKey });
-
-            // IMPORTANT: Prompt specifically asks for strict format to avoid parsing errors
-            const prompt = `List the next 5 confirmed official matches for Manchester City Men's Team (Timezone: GMT+7/Vietnam Time).
-            Rules:
-            1. STRICT Format per line: Date(dd/mm)|Time(HH:mm)|Opponent Name|Competition|Home or Away
-            2. Example: 26/11|03:00|Feyenoord|UCL|Home
-            3. Do not include logos or markdown images in the response text, I have them pre-defined.
-            4. If exact time is TBD, estimate or put 00:00.
-            5. Return ONLY the list. No intro text.`;
-
-            let response;
-            let usedSearch = false;
-
-            try {
-                // Attempt 1: With Search
-                response = await ai.models.generateContent({
-                    model: 'gemini-2.5-flash',
-                    contents: prompt,
-                    config: {
-                        tools: [{ googleSearch: {} }],
-                        temperature: 0.1
-                    }
-                });
-                usedSearch = true;
-            } catch (searchError) {
-                console.warn("Search failed, falling back to basic generation", searchError);
-                // Attempt 2: Without Search
-                response = await ai.models.generateContent({
-                    model: 'gemini-2.5-flash',
-                    contents: prompt,
-                    config: {
-                        temperature: 0.1
-                    }
-                });
-            }
-
-            // Safe extraction of sources
-            // @ts-ignore
-            const chunks = usedSearch ? (response.candidates?.[0]?.groundingMetadata?.groundingChunks || []) : [];
-            const extractedSources = chunks
-                // @ts-ignore
-                .map(c => c.web ? { uri: c.web.uri, title: c.web.title } : null)
-                .filter(Boolean) as Array<{ uri: string, title: string }>;
-
-            const uniqueSources = extractedSources.filter((v, i, a) => a.findIndex(t => t.uri === v.uri) === i).slice(0, 3);
-
-            const text = response.text || '';
-            const lines = text.split('\n').filter(l => l.includes('|'));
-
-            const parsedMatches: SimpleMatch[] = lines.map((line, index) => {
-                const parts = line.split('|').map(s => s.trim());
-                if (parts.length >= 5) {
-                    return {
-                        id: `match-${Date.now()}-${index}`,
-                        date: parts[0],
-                        time: parts[1],
-                        opponent: parts[2],
-                        competition: parts[3],
-                        isHome: parts[4].toLowerCase().includes('home'),
-                        crest: 'N/A' // Handled by component via PREDEFINED_LOGOS
-                    };
-                }
-                return null;
-            }).filter(Boolean) as SimpleMatch[];
-
-            if (parsedMatches.length > 0) {
-                setMatches(parsedMatches);
-                setSources(uniqueSources);
-
-                const cacheData: ScheduleCache = {
-                    timestamp: Date.now(),
-                    matches: parsedMatches,
-                    sources: uniqueSources
-                };
-                localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
-                setLastUpdated(Date.now());
-            } else {
-                throw new Error("Không lấy được dữ liệu chuẩn.");
-            }
-
-        } catch (err: any) {
-            console.error("Error fetching schedule, using fallback:", err);
-            // FALLBACK TO MOCK DATA if API fails completely
+            // Use mock data since no external API is available
             const mocks = generateMockSchedule();
             setMatches(mocks);
             setSources([]);
-            // Don't save mock data to cache to retry API next time
+        } catch (err: any) {
+            console.error("Error generating schedule:", err);
+            const mocks = generateMockSchedule();
+            setMatches(mocks);
+            setSources([]);
         } finally {
             setLoading(false);
         }
