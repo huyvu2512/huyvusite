@@ -1,5 +1,6 @@
 
 import React, { useState, useCallback, useRef, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import CalendarHeader from './components/LichNghi/CalendarHeader.tsx';
 import CalendarGrid from './components/LichNghi/CalendarGrid.tsx';
 import Sidebar from './components/Common/Sidebar.tsx';
@@ -266,6 +267,7 @@ function App() {
       </div>
       <ScrollToTopButton />
       <Footer />
+      <Analytics />
     </div>
   );
 }
